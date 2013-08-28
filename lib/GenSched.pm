@@ -5,8 +5,7 @@ use Mo qw(required default);
 use Scalar::Util 'blessed';
 use AI::Genetic;
 use GenSched::Allocation;
-use GenSched::Constraint::Persons;
-use GenSched::Constraint::Classes;
+use GenSched::Constraint;
 use GenSched::PeriodicCallback;
 
 # problem description
@@ -107,10 +106,16 @@ sub register_callback {
 
 # constraints
 has constraints => [
-    GenSched::Constraint::Persons->new(),
-    GenSched::Constraint::Classes->new(),
+    $GenSched::Constraint::persons,
+    $GenSched::Constraint::classes,
 ];
-sub register_constraint { push @{shift->constraints}, shift }
+
+# register a constraint (code ref or a GenSched::Constraint object)
+sub register_constraint {
+    my ($self, $c) = @_;
+    $c = GenSched::Constraint->new(code => $c) unless blessed $c;
+    push @{shift->constraints}, $c
+}
 
 sub fitness {
     my ($self, $genes) = @_;

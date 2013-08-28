@@ -7,11 +7,11 @@ use Test::More;
 
 use FindBin '$Bin';
 use lib "$Bin/../../lib";
+use GenSched::Constraint;
 use GenSched::Allocation;
-use GenSched::Constraint::Classes;
 
 # prepare constraint
-my $constraint = GenSched::Constraint::Classes->new();
+my $constraint = $GenSched::Constraint::classes;
 is $constraint->name, 'classes', 'right name';
 
 # A A instead of A B

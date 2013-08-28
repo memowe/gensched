@@ -7,11 +7,11 @@ use Test::More;
 
 use FindBin '$Bin';
 use lib "$Bin/../../lib";
+use GenSched::Constraint;
 use GenSched::Allocation;
-use GenSched::Constraint::Persons;
 
 # prepare constraint
-my $constraint = GenSched::Constraint::Persons->new();
+my $constraint = $GenSched::Constraint::persons;
 is $constraint->name, 'persons', 'right name';
 
 # Chloro count 2
