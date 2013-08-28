@@ -1,6 +1,6 @@
 package GenSched::Constraint;
 
-use Mo qw(is required);
+use Mo;
 
 sub name {
     die 'unimplemented';

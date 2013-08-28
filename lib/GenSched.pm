@@ -1,6 +1,6 @@
 package GenSched;
 
-use Mo qw(is required default);
+use Mo qw(required default);
 
 use Scalar::Util 'blessed';
 use AI::Genetic;
@@ -10,29 +10,29 @@ use GenSched::Constraint::Classes;
 use GenSched::PeriodicCallback;
 
 # problem description
-has slots           => (is => 'ro', required => 1);
-has classes         => (is => 'ro', required => 1);
-has person_groups   => (is => 'ro', required => 1);
+has slots           => 1;
+has classes         => 1;
+has person_groups   => 1;
 
-# resulting list vector space
-has vector_space    => (is => 'ro', default => sub {[
+# resulting list vector space (not really a vector space)
+has list_vector_space => (is => 'ro', default => sub {[
     (map { my $pg = $_; map $pg => @{$_[0]->slots}  } @{$_[0]->person_groups}),
     (map { $_[0]->classes                           } @{$_[0]->slots}),
 ]});
 
 # genetic algorithm configuration
-has population      => (is => 'ro', default => 500);
-has crossover       => (is => 'ro', default => 0.95);
-has mutation        => (is => 'ro', default => 0.05);
-has strategy        => (is => 'rw', default => 'tournamentTwoPoint');
+has population  => 500;
+has crossover   => 0.95;
+has mutation    => 0.05;
+has strategy    => 'tournamentTwoPoint';
 
 # termination conditions
-has max_fitness     => (default => 1_000_000);
-has max_generations => (default => 5_000);
-has done            => (default => undef);
+has max_fitness     => 1_000_000;
+has max_generations => 5_000;
+has done            => undef;
 
 # genetic algorithm object
-has _ga             => (is => 'ro', default => sub {
+has _ga => sub {
     my $self = shift;
 
     # construct
@@ -53,14 +53,14 @@ has _ga             => (is => 'ro', default => sub {
     );
 
     # initialize list vector
-    $ga->init($self->vector_space);
+    $ga->init($self->list_vector_space);
 
     # done
     return $ga;
-});
+};
 
 # solution: building uses evolution
-has solution        => (is => 'ro', default => sub {
+has solution => sub {
     my $self = shift;
 
     # evolve (terminated by the ga terminate callback)
@@ -79,7 +79,7 @@ has solution        => (is => 'ro', default => sub {
 
     # done
     return $self->best_solution;
-});
+};
 
 # the best solution so far wrapped in a GenSched::Allocation object
 sub best_solution {
@@ -96,7 +96,7 @@ sub best_solution {
 }
 
 # periodically called callbacks
-has callbacks       => (default => []);
+has callbacks => [];
 
 # register a periodic callback (code ref or a GenSched::PeriodicCallback object)
 sub register_callback {
@@ -106,10 +106,10 @@ sub register_callback {
 }
 
 # constraints
-has constraints     => (default => [
+has constraints => [
     GenSched::Constraint::Persons->new(),
     GenSched::Constraint::Classes->new(),
-]);
+];
 sub register_constraint { push @{shift->constraints}, shift }
 
 sub fitness {

@@ -1,6 +1,7 @@
 package GenSched::Constraint::Persons;
 
 use Mo;
+extends 'GenSched::Constraint';
 
 sub name { 'persons' }
 

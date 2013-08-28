@@ -1,6 +1,7 @@
 package GenSched::Constraint::Classes;
 
 use Mo;
+extends 'GenSched::Constraint';
 
 sub name { 'classes' }
 

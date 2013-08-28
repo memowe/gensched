@@ -17,7 +17,7 @@ my $gs = GenSched->new(
 );
 
 # test the resulting list vector space
-is_deeply $gs->vector_space, [
+is_deeply $gs->list_vector_space, [
     [qw(Aaron Berta)],
     [qw(Aaron Berta)],
     [qw(A F)],
