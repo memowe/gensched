@@ -53,6 +53,7 @@ is $count_b, 1, 'right number of period-3 calls';
 is $gs->fitness($solution), 1_000_000, 'full fitness';
 
 # test constraints (removance) explicitely
+is scalar(@{$gs->constraints}), 2, 'right constraint number';
 is scalar(grep { $_->name eq 'persons' } @{$gs->constraints}), 1,
     'persons constraint exists';
 is scalar(grep { $_->name eq 'classes' } @{$gs->constraints}), 1,
@@ -60,5 +61,6 @@ is scalar(grep { $_->name eq 'classes' } @{$gs->constraints}), 1,
 $gs->remove_constraint('classes');
 is scalar(grep { $_->name eq 'classes' } @{$gs->constraints}), 0,
     'classes constraint deleted';
+is scalar(@{$gs->constraints}), 1, 'right constraint number';
 
 done_testing;

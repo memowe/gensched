@@ -120,10 +120,7 @@ sub register_constraint {
 # remove a constraint by name
 sub remove_constraint {
     my ($self, $name) = @_;
-    for my $ci (0 .. $#{$self->constraints}) {
-        delete $self->constraints->[$ci]
-            if $self->constraints->[$ci]->name eq $name;
-    }
+    $self->constraints([ grep { $_->name ne $name } @{$self->constraints} ]);
 }
 
 sub fitness {
