@@ -14,6 +14,9 @@ my $gs = GenSched->new(
     slots           => [qw(slot1    slot2   slot3)],
     classes         => [qw(class1   class2  class3)],
     person_groups   => [[qw(woman1  woman2  woman3)], [qw(man1 man2 man3)]],
+    population      => 50,
+    crossover       => 0.9,
+    mutation        => 0.1,
 );
 
 # add matching-numbers-constraint
