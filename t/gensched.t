@@ -52,4 +52,13 @@ is $count_b, 1, 'right number of period-3 calls';
 # should have a full fitness score after five seconds
 is $gs->fitness($solution), 1_000_000, 'full fitness';
 
+# test constraints (removance) explicitely
+is scalar(grep { $_->name eq 'persons' } @{$gs->constraints}), 1,
+    'persons constraint exists';
+is scalar(grep { $_->name eq 'classes' } @{$gs->constraints}), 1,
+    'classes constraint exists';
+$gs->remove_constraint('classes');
+is scalar(grep { $_->name eq 'classes' } @{$gs->constraints}), 0,
+    'classes constraint deleted';
+
 done_testing;

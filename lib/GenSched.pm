@@ -117,6 +117,15 @@ sub register_constraint {
     push @{shift->constraints}, $c
 }
 
+# remove a constraint by name
+sub remove_constraint {
+    my ($self, $name) = @_;
+    for my $ci (0 .. $#{$self->constraints}) {
+        delete $self->constraints->[$ci]
+            if $self->constraints->[$ci]->name eq $name;
+    }
+}
+
 sub fitness {
     my ($self, $genes) = @_;
 
