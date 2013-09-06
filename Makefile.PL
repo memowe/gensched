@@ -18,6 +18,7 @@ WriteMakefile(
     MIN_PERL_VERSION    => '5.10.1',
     PREREQ_PM           => {
         'Scalar::Util'  => '1.21',
+        'List::Util'    => '1.21',
         'Mo'            => '0.35',
         'AI::Genetic'   => '0.05',
     },
