@@ -9,9 +9,9 @@ use GenSched::Constraint;
 use GenSched::PeriodicCallback;
 
 # problem description
-has slots           => 1;
-has classes         => 1;
-has person_groups   => 1;
+has slots           => (required => 1);
+has classes         => (required => 1);
+has person_groups   => (required => 1);
 
 # resulting list vector space (not really a vector space)
 has list_vector_space => (is => 'ro', default => sub {[
