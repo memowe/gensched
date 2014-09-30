@@ -1,6 +1,6 @@
 package GenSched::Allocation;
 
-use Mo qw(is required default build);
+use GenSched::Mo qw(is required default build);
 
 has genes           => (is => 'ro', required => 1);
 has slot_names      => (is => 'ro', required => 1);

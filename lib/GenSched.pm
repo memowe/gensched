@@ -1,6 +1,6 @@
 package GenSched;
 
-use Mo qw(required default);
+use GenSched::Mo qw(required default);
 
 use Scalar::Util 'blessed';
 use AI::Genetic;

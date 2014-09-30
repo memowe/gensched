@@ -1,6 +1,6 @@
 package GenSched::PeriodicCallback;
 
-use Mo qw(default required);
+use GenSched::Mo qw(default required);
 
 has seconds => 5;
 has last    => 0;

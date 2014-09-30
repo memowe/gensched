@@ -1,6 +1,6 @@
 package GenSched::Constraint;
 
-use Mo qw(default required);
+use GenSched::Mo qw(default required);
 
 has name => 'anonymous';
 has code => (required => 1);

@@ -19,7 +19,6 @@ WriteMakefile(
     PREREQ_PM           => {
         'Scalar::Util'  => '1.21',
         'List::Util'    => '1.21',
-        'Mo'            => '0.35',
         'AI::Genetic'   => '0.05',
     },
     test                => {TESTS => 't/*.t t/*/*.t'},
