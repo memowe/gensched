@@ -57,7 +57,7 @@ sub slots_of_person {
     # try to find the slots
     my @slots;
     for my $slot (@{$self->slots}) {
-        push @slots, $slot if $person ~~ $slot->{persons};
+        push @slots, $slot if grep /^$person$/ => @{$slot->{persons}};
     }
 
     # done
