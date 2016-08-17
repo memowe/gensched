@@ -28,6 +28,7 @@ is_deeply $gs->list_vector_space, [
 my $now = time;
 my ($last_a, $last_b, $count_a, $count_b) = ($now - 5, $now, 0, 0);
 $gs->register_callback(sub {
+    is shift, $gs, 'right self argument';
     is time - $last_a, 5, 'right period (5)';
     $last_a = time;
     $count_a++;
@@ -35,6 +36,7 @@ $gs->register_callback(sub {
 });
 $gs->register_callback(GenSched::PeriodicCallback->new(
     seconds => 3, last => $now, code => sub {
+        is shift, $gs, 'right self argument';
         is time - $last_b, 3, 'right period (3)';
         $last_b = time;
         $count_b++;

@@ -72,7 +72,7 @@ has solution => sub {
         for my $cb (@{$self->callbacks}) {
             next if $cb->last + $cb->seconds > time;
             $cb->last(time);
-            $cb->code->();
+            $cb->code->($self);
         }
     }
 
